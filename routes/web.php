@@ -18,9 +18,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', function () {
+    return 'Você não esta autenticado.';
+})->name('login');
 
-// Route::middleware(['web'])->group(function () {
+Route::prefix('posts')->group(function () {
+    Route::name('post.')->group(function () {
+        Route::get('/', [PostsController::class, 'index'])
+            ->name('index');
 
-Route::get('posts/criar-novo-post', [PostsController::class, 'create']);
-Route::post('posts/store', [PostsController::class, 'store']);
-// });
+        Route::middleware('auth')->group(function () {
+            Route::get('criar-novo-post', [PostsController::class, 'create'])
+                ->name('create');
+            Route::post('store', [PostsController::class, 'store'])
+                ->name('store');
+        });
+    });
+});

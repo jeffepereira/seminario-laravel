@@ -15,7 +15,27 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'content' => 'required|max:20'
+            'title' => 'required|max:25',
+            'content' => 'required',
+            'image' => 'required|image|mimes:jpeg,jpg,png',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'O campo :attribute é obrigatório.',
+            'max' => 'O :attribute deve conter no máximo :max caracteres.',
+            'content.required' => 'Você esqueceu de preencher o :attribute.'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'título do post',
+            'content' => 'conteúdo do post',
+            'image' => 'imagem',
         ];
     }
 }
