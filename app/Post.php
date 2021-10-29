@@ -11,6 +11,19 @@ class Post extends Model
 
     protected $fillable = ['title', 'content', 'image'];
 
+    // creating, created, updating, updated, deleting, deleted
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($post) {
+            Storage::disk('public')->delete($post->image);
+        });
+    }
+
+
     public function wayImage()
     {
         return Storage::url($this->image);

@@ -1,14 +1,14 @@
-@extends('template.layout')
+@extends('layouts.app')
 
 
-@section('conteudo')
+@section('content')
 
 @component('alert', ['type' => "Info!!!"])
 <p class="my-0"> Esta é a página de criação do Post</p>
 @endcomponent
 
 <div class="py-3 px-3">
-    <form method="post" action="{{url('/posts/store')}}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('post.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="inputTitle" class="form-label">Título</label>

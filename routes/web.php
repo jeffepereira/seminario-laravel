@@ -32,6 +32,21 @@ Route::prefix('posts')->group(function () {
                 ->name('create');
             Route::post('store', [PostsController::class, 'store'])
                 ->name('store');
+
+            Route::middleware('redirect.with.id.post')->group(function () {
+                Route::get('editar-post/{id}', [PostsController::class, 'edit'])
+                    ->name('edit');
+            });
+
+            Route::patch('update', [PostsController::class, 'update'])
+                ->name('update');
+
+            Route::delete('delete', [PostsController::class, 'destroy'])
+                ->name('destroy');
         });
     });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

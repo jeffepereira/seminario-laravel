@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StorePostRequest extends FormRequest
+class UpdatePostRequest extends FormRequest
 {
 
     /**
@@ -16,9 +16,9 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'max:25', Rule::unique('posts_seminario', 'title')],
+            'title' => ['required', 'max:25', Rule::unique('posts_seminario', 'title')->ignore($this->id)],
             'content' => 'required',
-            'image' => 'required|image|mimes:jpeg,jpg,png',
+            'image' => 'image|mimes:jpeg,jpg,png',
         ];
     }
 
