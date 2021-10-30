@@ -13,7 +13,6 @@ class Post extends Model
 
     // creating, created, updating, updated, deleting, deleted
 
-
     protected static function boot()
     {
         parent::boot();
@@ -27,5 +26,10 @@ class Post extends Model
     public function wayImage()
     {
         return Storage::url($this->image);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id');
     }
 }
